@@ -12,6 +12,8 @@ async function bootstrap() {
   app.setViewEngine('hbs');
   hbs.registerPartials(join(__dirname, '..', 'views/layouts'));
 
+  
+
   await app.listen(3000);
 }
 bootstrap();
