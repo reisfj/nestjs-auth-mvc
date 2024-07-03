@@ -1,0 +1,27 @@
+{{!-- Página Home --}}
+<h1>Bem-vindo à Home</h1>
+<ul id="users-list"></ul>
+
+<script>
+  async function fetchUsers() {
+    const token = localStorage.getItem('token');
+    const response = await fetch('/api/users', {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+
+    if (response.ok) {
+      const users = await response.json();
+      const usersList = document.getElementById('users-list');
+      usersList.innerHTML = '';
+      users.forEach(user => {
+        const li = document.createElement('li');
+        li.textContent = user.name;
+        usersList.appendChild(li);
+      });
+    } else {
+      alert('Failed to fetch users');
+    }
+  }
+
+  fetchUsers();
+</script>
