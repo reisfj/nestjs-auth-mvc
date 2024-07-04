@@ -19,15 +19,7 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     @IsString()
-    street: string;
-
-    @IsNotEmpty()
-    @IsString()
-    neighborhood: string;
-
-    @IsNotEmpty()
-    @IsString()
-    number: string;
+    address: string;
 
     @IsNotEmpty()
     @IsString()

@@ -16,6 +16,7 @@ db.users.insertOne({
   name: 'John Doe',
   email: 'john.doe@example.com',
   password: 'hashedpassword', 
+  cep: '45810-000',
   address: '123 Main St',
 });
 
