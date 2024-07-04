@@ -1,4 +1,3 @@
-{{!-- Página Home --}}
 <h1>Bem-vindo à Home</h1>
 <ul id="users-list"></ul>
 
@@ -15,7 +14,7 @@
       usersList.innerHTML = '';
       users.forEach(user => {
         const li = document.createElement('li');
-        li.textContent = user.name;
+        li.textContent = user.fullName;
         usersList.appendChild(li);
       });
     } else {
