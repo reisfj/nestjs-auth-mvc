@@ -26,7 +26,8 @@
       localStorage.setItem('token', result.access_token);
       window.location.href = '/home';
     } else {
-      alert('Failed to login');
+      alert('Falha ao fazer login');
+      console.log('Login failed:', response.statusText);
     }
   });
 </script>

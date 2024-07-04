@@ -4,6 +4,14 @@
 <script>
   async function fetchUsers() {
     const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Token não encontrado, por favor faça login novamente.');
+      window.location.href = '/login';
+      return;
+    }
+
+    console.log('Token:', token); // Adicione este log
+
     const response = await fetch('/api/users', {
       headers: { 'Authorization': `Bearer ${token}` },
     });
@@ -19,6 +27,7 @@
       });
     } else {
       alert('Failed to fetch users');
+      console.log('Failed to fetch users:', response.statusText); // Adicione este log
     }
   }
 
