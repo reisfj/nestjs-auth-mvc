@@ -1,0 +1,112 @@
+<style>
+  .login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.form-container {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+h1 {
+  font-family: 'Raleway Semibold', sans-serif;
+  color: #4d27b4;
+  text-align: center;
+  font-size: 40px;
+  margin: 15px;
+  
+}
+
+p {
+  font-family: 'Raleway Semibold', sans-serif;
+  color: #00000091;
+  text-align: center;
+  font-size: 14px;
+  margin: 0 0 30px;
+}
+
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #0000002c;
+  border-radius: 10px;
+  color: #000000e7;
+  margin: 5px;
+}
+
+input::placeholder {
+  color: #00000091;
+}
+input:hover {
+   border: 1px solid #f9b17a;
+}
+input:focus {
+    border-color: #4d27b4; 
+    outline: none; 
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4d27b4;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+button:hover {
+  background-color: #40248f;
+}
+
+  
+</style>
+<div class="login-page">
+  <div class="form-container">
+    <h1>Login</h1>
+    <p>Olá, acesse sua conta!</p>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Enter your email" name="email" required><br>
+      <input type="password" id="password" placeholder="Enter your password"  name="password" required><br>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    alert(JSON.stringify(data), JSON.stringify(formData))
+
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      localStorage.setItem('token', result.access_token);
+      window.location.href = '/';
+    } else {
+      alert('Failed to login');
+    }
+  });
+</script>

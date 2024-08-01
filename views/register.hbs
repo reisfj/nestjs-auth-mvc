@@ -1,0 +1,132 @@
+<style>
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 100px;
+}
+
+.form-container {
+   background-color: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between; 
+}
+
+h1 {
+  font-family: 'Raleway Semibold', sans-serif;
+  color: #4d27b4;
+  text-align: center;
+  font-size: 40px;
+  margin: 15px;
+  
+}
+
+p {
+  font-family: 'Raleway Semibold', sans-serif;
+  color: #00000091;
+  text-align: center;
+  font-size: 14px;
+  margin: 0 0 30px;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+   width: 100%;
+  padding: 10px;
+  border: 1px solid #0000002c;
+  border-radius: 10px;
+  color: #000000e7;
+  margin: 5px;
+ 
+}
+
+input::placeholder {
+  color: #00000091;
+}
+input:hover {
+   border: 1px solid #f9b17a;
+}
+input:focus {
+    border-color: #4d27b4; 
+    outline: none; 
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4d27b4;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 30px;
+  
+}
+
+button:hover {
+  background-color: #40248f;
+}
+</style>
+
+
+</style>
+<div class="register-page">
+  <div class="form-container">
+    <h1>Criar conta</h1>
+    <p>Crie sua conta gratuita</p>
+    <form id="register-form">
+      <input type="text" id="fullName" placeholder="Nome Completo" name="fullName" required><br>
+      <input type="email" id="email" placeholder="Email" name="email" required><br>
+      <input type="password" id="password" placeholder="Senha" name="password" required><br>
+      <input type="password" id="confirmPassword" placeholder="Confirme Sua Senha" name="confirmPassword" required><br>
+      <input type="text" id="address" name="address" placeholder="Endereço(Rua, Bairro, Número)" required><br>
+      <input type="text" id="city" placeholder="Cidade" name="city" required><br>
+      <input type="text" id="state" placeholder="Estado" name="state" required><br>
+      <input type="text" id="cep" placeholder="CEP" name="cep" required><br>
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('register-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    if (data.password !== data.confirmPassword) {
+      alert('As senhas não coincidem');
+      return;
+    }
+
+    const cepResponse = await fetch(`https://viacep.com.br/ws/${data.cep}/json/`);
+    if (!cepResponse.ok || (await cepResponse.json()).erro) {
+      alert('CEP inválido');
+      return;
+    }
+
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert('Usuário registrado com sucesso');
+      window.location.href = '/login';
+    } else {
+      alert('Falha ao registrar usuário');
+    }
+  });
+</script>
