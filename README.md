@@ -1,31 +1,32 @@
 # NestJS Auth MVC
 
-## Descrição
-Projeto MVP utilizando NestJS com autenticação via JWT. Inclui páginas de cadastro, login, recuperação de senha e home.
+## Description
+The "nestjs-auth-mvc" project is an authentication system developed with NestJS, written with TypeScript with a structure focused on Object Orientation with the MVC architecture and using authentication resources such as JWT. It includes features such as user registration, login and password recovery, with specific pages for each one. The project is configured to run with MongoDB and provides an API with REST endpoints to manage authentication and user listing. The structure is focused on the clear and secure management of tokens and users.
 
-## Configuração
-1. Clone o repositório:
-    ```bash
-    git clone <repo-url>
-    cd nestjs-auth-mvc
-    ```
+## Configuration
+1. Clone the repository:
+```bash
+git clone <repo-url>
+cd nestjs-auth-mvc
+```
 
-2. Instale as dependências:
-    ```bash
-    npm install
-    ```
+2. Install the dependencies:
+```bash
+npm install
+```
 
-3. Configure o MongoDB:
-    Certifique-se de que o MongoDB está em execução e a conexão está configurada corretamente no `src/app.module.ts`.
+3. Configure MongoDB:
 
-4. Inicie o servidor:
-    ```bash
-    npm run start
-    ```
+Make sure MongoDB is running and the connection is configured correctly in `src/app.module.ts`.
 
-5. Acesse o projeto em `http://localhost:3000`.
+4. Start the server:
+```bash
+npm run start
+```
+
+5. Access the project at `http://localhost:3000`.
 
 ## Endpoints
-- `POST /api/auth/register` - Registra um novo usuário.
-- `POST /api/auth/login` - Autentica um usuário.
-- `GET /api/users` - Lista todos os usuários cadastrados.
+- `POST /api/auth/register` - Registers a new user.
+- `POST /api/auth/login` - Authenticates a user.
+- `GET /api/users` - Lists all registered users.
